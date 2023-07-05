@@ -1,0 +1,11 @@
+sort(nums.begin(),nums.end());
+int mindiff=INT_MAX;
+if(n<m)
+return -1;
+
+for(int i=0;i+m-1<n;i++)
+{
+    int diff=nums[i+m-1]-nums[i];
+    mindiff=min(mindiff,diff);
+}
+return mindiff;
