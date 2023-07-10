@@ -1,4 +1,4 @@
-//solution1 : Optimal
+//solution1 : Optimal(Valley peak approach)
 
 class Solution {
 public:
@@ -18,7 +18,7 @@ public:
 };
 
 
-//solution2 : Optimal
+//solution2 : Optimal(Greedy approach)
 
 class Solution {
 public:
