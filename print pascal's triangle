@@ -1,0 +1,24 @@
+vector<int>generateRow(int n)
+{
+     long long res=1;
+     vector<int>temp;
+     temp.push_back(1);
+     for(int col=1;col<n;col++)
+     {
+         res=res*(n-col);
+         res=res/col;
+         temp.push_back(res);
+     } 
+     return temp;
+}
+
+
+vector<vector<int>> pascalTriangle(int N) {
+    // Write your code here.
+    vector<vector<int>>ans;
+    for(int i=1;i<=N;i++)
+    {
+        ans.push_back(generateRow(i));
+    }
+    return ans;
+}
