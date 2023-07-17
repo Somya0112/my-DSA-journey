@@ -1,0 +1,14 @@
+void PrintList(ListNode * head)
+{
+  ListNode * curr = head;
+  for (; curr != NULL; curr = curr -> next)
+    cout << curr -> val << "-->";
+  cout << "null" << endl;
+}
+
+ListNode * InsertatFirst(int value, ListNode * head) {
+  ListNode * newnode = new ListNode(value);
+  newnode -> next = head;
+  head = newnode;
+  return head;
+}
