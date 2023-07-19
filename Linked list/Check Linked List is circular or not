@@ -1,0 +1,18 @@
+bool isCircular(Node* head){
+    // Write your code here.
+   if(head==NULL) return true;
+   Node* slow=head;
+   Node* fast=head->next;
+   while(slow!=fast)
+   {
+       if(fast==NULL||fast->next==NULL)
+       return false;
+
+       fast=fast->next->next;
+       slow=slow->next;
+   }
+
+   if(slow->next==head) return true;
+
+    return false;
+}
