@@ -1,0 +1,63 @@
+Node* merge(Node* l1,Node* l2)
+{
+
+    Node* ans=new Node(0);
+	Node* temp=ans;
+
+
+    if(l1==NULL)
+	return l2;
+
+	if(l2==NULL)
+	return l1;
+
+	while(l1!=NULL&&l2!=NULL)
+	{
+		if(l1->data<l2->data)
+		{
+			temp->child=l1;
+			temp=temp->child;
+            l1=l1->child;
+			
+		}
+		else{
+			temp->child=l2;
+			temp=temp->child;
+            l2=l2->child;
+			
+		}
+	}
+	while(l1!=NULL)
+	{
+		temp->child=l1;
+			temp=temp->child;
+            l1=l1->child;
+	}
+
+    while(l2!=NULL)
+	{
+		temp->child=l2;
+			temp=temp->child;
+            l2=l2->child;
+	}
+
+	ans=ans->child;
+	return ans;
+}
+
+
+Node* flattenLinkedList(Node* head) 
+{
+	// Write your code here
+	if(head==NULL||head->next==NULL)
+	return head;
+
+
+    Node* curr=head;
+	Node* sorted=flattenLinkedList(head->next);
+	curr->next=NULL;
+
+	Node* res=merge(curr,sorted);
+	return res;
+
+}
