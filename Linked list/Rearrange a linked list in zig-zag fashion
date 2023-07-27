@@ -1,0 +1,39 @@
+//Brute (T.C=O(N),S.=O(N))
+node* zigzag(node* head, bool flag)
+{
+    if (!head || !head->next)
+        return head;
+    if (flag == 1) {
+        if (head->data > head->next->data)
+            swap(head->data, head->next->data);
+        return zigzag(head->next, !flag);
+    }
+    else {
+        if (head->data < head->next->data)
+            swap(head->data, head->next->data);
+        return zigzag(head->next, !flag);
+    }
+}
+
+
+
+//Optimal (T.C=O(N),S.C=O(1))
+void zigZagList(Node* head)
+{
+    bool flag = true;
+    Node* current = head;
+    while (current->next != NULL) {
+        if (flag) 
+        {
+            if (current->data > current->next->data)
+                swap(current->data, current->next->data);
+        }
+        else 
+        {
+            if (current->data < current->next->data)
+                swap(current->data, current->next->data);
+        }
+        current = current->next;
+        flag = !flag; 
+    }
+}
