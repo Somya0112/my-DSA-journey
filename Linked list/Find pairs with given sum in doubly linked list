@@ -1,0 +1,32 @@
+vector<pair<int, int>> findPairs(Node* head, int k)
+{
+    // Write your code here.
+     if(head==NULL ||head->next==NULL)
+         return {};
+   
+     vector<pair<int,int>>ans;
+     Node* left=head;
+     Node* right=head;
+     while(right->next!=NULL)
+     {
+         right=right->next;
+     } 
+
+     while(left!=right&& right->next!=left)
+     {
+         if(left->data+right->data==k)
+         {
+             ans.push_back({left->data,right->data});
+             left=left->next;
+             right=right->prev;
+         }
+         else
+         {
+             if(left->data+right->data>k)
+             right=right->prev;
+             else
+             left=left->next;
+         }
+     }
+     return ans;   
+}
