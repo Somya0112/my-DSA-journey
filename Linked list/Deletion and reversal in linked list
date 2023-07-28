@@ -1,0 +1,70 @@
+void deleteNode(struct Node **head, int key)
+{
+
+   if (*head == NULL)
+        return;
+          
+    if((*head)->data==key && (*head)->next==*head)
+    {
+        free(*head);
+        *head=NULL;
+        return;
+    }
+      
+    Node *last=*head,*d;
+      
+
+    if((*head)->data==key) 
+    {
+          
+        while(last->next!=*head)
+            last=last->next;
+              
+    
+        last->next=(*head)->next;
+        free(*head);
+        *head=last->next;
+      return;
+    }  
+    
+
+    while(last->next!=*head&&last->next->data!=key) 
+    {
+        last=last->next;
+    }
+      
+   
+    if(last->next->data==key) 
+    {
+        d=last->next;
+        last->next=d->next;
+        free(d);
+    }
+    else{
+        cout<<"no such keyfound";
+    }
+
+}
+
+
+/* Function to reverse the linked list */
+ void reverse(struct Node** head_ref)
+{
+  if (*head_ref == NULL)
+        return;
+ 
+// Your code goes here
+    Node* prev=NULL;
+    Node* curr=*head_ref;
+    Node* next=NULL;
+    do
+    {
+        next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+    }while(curr!=*head_ref);
+    
+    (*head_ref)->next=prev;
+    *head_ref = prev;
+}
