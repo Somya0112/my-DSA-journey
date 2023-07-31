@@ -1,0 +1,21 @@
+Node* reverseDLLInGroups(Node* head, int k)
+{	
+    // Write your code here. 
+	Node* prev=NULL;
+	Node* curr=head;
+	Node* nxt=NULL;
+	int count=0;
+	while(curr!=NULL && count<k)
+	{
+        nxt=curr->next;
+		curr->next=prev;
+		prev=curr;
+		curr=nxt;
+		count++;
+	}
+
+	if(nxt!=NULL)
+	head->next=reverseDLLInGroups(nxt,k);
+
+	return prev;
+}
