@@ -1,0 +1,65 @@
+//Solution 1 (T.C=O(N),S.C=O(1))
+DLLNode* rotateDLL(DLLNode* head, int k) 
+{
+    // Write your code here.
+	if(k==0)
+	return head;
+	
+    DLLNode* temp=head;
+	while(temp->next!=NULL)
+	{
+		temp=temp->next;
+	}
+
+	temp->next=head;
+	head->prev=temp;
+	
+	int cnt=1;
+	while(cnt<=k)
+	{
+		head=head->next;
+		temp=temp->next;
+		cnt++;
+	}
+	temp->next=NULL;
+	head->prev=NULL;
+	
+	return head;
+}
+
+
+
+
+
+//Solution 2 (T.C=O(N),S.C=O(1))
+DLLNode* rotateDLL(DLLNode* head, int k) 
+{
+    // Write your code here.
+	if(k==0)
+	return head;
+
+	DLLNode* curr=head;
+
+	while(k)
+	{
+		curr=curr->next;
+		k--;
+	}
+
+	DLLNode* tail=curr->prev;
+	DLLNode* newhead=curr;
+	tail->next=NULL;
+	curr->prev=NULL;
+
+	while(curr->next!=NULL)
+	{
+		curr=curr->next;
+	}
+
+	curr->next=head;
+	head->prev=curr;
+	head=newhead;
+
+	return head;
+
+}
