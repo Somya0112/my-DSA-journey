@@ -1,0 +1,49 @@
+ ListNode* reverseBetween(ListNode* head, int left, int right)
+    {
+       
+         if(left==right)return head;
+        ListNode* left_prev=NULL;//LIKE perv, it stores left_prev
+/////////////storing lh
+        ListNode* temp=head;
+        int count=1;
+        while(count!=left)
+        {
+            count++;
+            left_prev=temp;
+            temp=temp->next;
+        }
+        ListNode* LH=temp;
+//////////storing rh
+        while(count!=right)
+        {
+            count++;
+            temp=temp->next;
+        }
+        ListNode* RH=temp;
+        ListNode* right_next=RH->next;
+        RH->next=NULL;//detaching from right node
+
+        ListNode* prev=NULL;
+        ListNode* curr=LH;
+        ListNode* forw=NULL;
+
+        while(curr!=NULL)
+        {
+            forw=curr->next;
+            curr->next=prev;
+
+            prev=curr;
+            curr=forw;
+        }
+        //curr will reach null , prev will be curr postition 
+        //so coinnecting left_prev to prev
+         if(LH==head){
+          LH->next=right_next;
+           return RH;
+        }
+        
+        left_prev->next=prev;
+        LH->next=right_next;
+
+        return head;  
+    }
