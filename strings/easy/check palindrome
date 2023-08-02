@@ -1,0 +1,50 @@
+#include <bits/stdc++.h> 
+char lowercase(char ch)
+{
+    if(ch>='a'&&ch<='z')
+    {
+        return ch;
+    }
+    else
+    {
+        char temp=ch-'A'+'a';
+        return temp;
+    }
+}
+
+
+bool isconsider(char ch)
+{
+    if((ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z')||(ch>='0'&&ch<='9'))
+    return 1;
+    else
+    return false;
+}
+
+
+bool checkPalindrome(string s)
+{
+    // Write your code here.
+    int st=0;
+    int end=s.length()-1;
+    while(st<=end)
+    {
+        if(isconsider(s[st])==false)
+        {
+            st++;
+        }
+        else if(isconsider(s[end])==false)
+        {
+            end--;
+        }
+        else if(lowercase(s[st])==lowercase(s[end]))
+        {
+            st++;
+            end--;
+        }
+        else{
+            return false;
+        }
+    }
+    return true;
+}
