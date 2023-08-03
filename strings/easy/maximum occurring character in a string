@@ -1,0 +1,25 @@
+char highestOccurringChar(char input[]) {
+    // Write your code here
+    int arr[26]={0};
+    int num=0;
+
+    for(int i=0;input[i]!='\0';i++)
+    {
+        char ch=input[i];
+        num=ch-'a';
+        arr[num]++;
+    }
+
+    int maxi=-1,ans=0;
+    for(int i=0;i<26;i++)
+    {
+        if(maxi<arr[i])
+        {
+            ans=i;
+            maxi=arr[i];
+        }
+    }
+
+    return 'a'+ans;
+
+}
