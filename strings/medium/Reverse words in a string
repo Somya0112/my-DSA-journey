@@ -2,17 +2,17 @@ string result(string s)
 {
     int left = 0;
     int right = s.length()-1;
-    
     string temp="";
     string ans="";
-    
-    //Iterate the string and keep on adding to form a word
-    //If empty space is encountered then add the current word to the result
-    while (left <= right) {
+    while (left <= right)
+    {
         char ch= s[left];
-        if (ch != ' ') {
+        if (ch != ' ')
+        {
             temp += ch;
-        } else if (ch == ' ') {
+        } 
+        else if (ch == ' ')
+        {
             if (ans!="") ans = temp + " " + ans;
             else ans = temp;
             temp = "";
@@ -21,7 +21,8 @@ string result(string s)
     }
     
     //If not empty string then add to the result(Last word is added)
-    if (temp!="") {
+    if (temp!="")
+    {
         if (ans!="") ans = temp + " " + ans;
         else ans = temp;
     }
