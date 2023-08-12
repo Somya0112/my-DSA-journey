@@ -1,0 +1,66 @@
+class Stack
+{
+    //Write your code here
+    Node* curr=NULL;
+
+public:
+    Stack()
+    {
+        //Write your code here
+    }
+
+    int getSize()
+    {
+        //Write your code here
+        Node* temp=curr;
+        int c=0;
+        while(temp)
+        {
+            c++;
+            temp=temp->next;
+        }
+        return c;
+    }
+
+    bool isEmpty()
+    {
+        //Write your code here
+        if(curr==NULL)
+        return true;
+
+        return false;
+    }
+
+    void push(int data)
+    {
+        //Write your code here
+        Node* newnode=new Node(data);
+        if(curr==NULL)
+        {
+            curr=newnode;
+            newnode->next=NULL;
+        }
+        else{
+            newnode->next=curr;
+            curr=newnode;
+        }
+    }
+
+    void pop()
+    {
+        //Write your code here
+        if(curr)
+        {
+            curr=curr->next;
+        }
+    }
+
+    int getTop()
+    {
+        //Write your code here
+        if(!curr)
+        return -1;
+
+        return curr->data;
+    }
+};
