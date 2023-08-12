@@ -1,0 +1,32 @@
+Node* front=NULL;
+ Node* rear=NULL;
+
+void Queue::push(int x) {
+    // Write Your Code Here
+    Node* newnode=new Node(x);
+    if(!front)
+    {
+        front=newnode;
+    }
+    else
+    {
+        rear->next=newnode;
+    }
+    rear=newnode;
+    rear->next=NULL;
+}
+
+int Queue::pop() {
+    // Write Your Code Here
+    if(front)
+    {
+        int x=front->data;
+        front=front->next;
+        if(!front)
+        {
+            rear=front;
+        }
+        return x;
+    }
+    return -1;
+}
