@@ -1,0 +1,86 @@
+//Using 2 Stacks (T.C=O(N) for push,S.C=O(2N))
+class MyQueue {
+    stack<int>input,output;
+public:
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        while(!input.empty())
+        {
+            output.push(input.top());
+            input.pop();
+        }
+        input.push(x);
+        while(!output.empty())
+        {
+            input.push(output.top());
+            output.pop();
+        }
+    }
+    
+    int pop() {
+        int t=input.top();
+        input.pop();
+        return t;
+    }
+    
+    int peek() {
+        return input.top();
+    }
+    
+    bool empty() {
+        return (input.empty() && output.empty());
+    }
+};
+
+
+
+
+
+//Using 2 Stacks(T.C=O(1) for push,S.C=O(2N))
+class MyQueue {
+    stack<int>input,output;
+public:
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        input.push(x);
+    }
+    
+    int pop() {
+        if(output.empty())
+        {
+            while(!input.empty())
+            {
+                output.push(input.top());
+                input.pop();
+            } 
+        }
+        int t=output.top();
+        output.pop();
+        return t;
+    }
+    
+    int peek() {
+        if(output.empty())
+        {
+            while(!input.empty())
+            {
+                output.push(input.top());
+                input.pop();
+            }
+        }
+        return output.top();
+    }
+    
+    bool empty() {
+        return (input.empty() && output.empty());
+    }
+};
+
+
+
