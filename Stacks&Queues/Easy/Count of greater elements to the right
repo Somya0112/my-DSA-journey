@@ -1,0 +1,19 @@
+vector<int> countGreater(vector<int>&arr, vector<int>&query) {
+    // Write your code here.
+   
+    int n=arr.size();
+    int m=query.size();
+    vector<int>ans(m);
+    int c;
+    for(int i=0;i<m;i++)
+    {
+        c=0;
+        for(int j=n-1;j>query[i];j--)
+        {
+            if(arr[query[i]]<arr[j])
+            c++;
+        }
+        ans[i]=c;
+    }
+    return ans;
+}
