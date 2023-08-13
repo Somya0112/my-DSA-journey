@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+string postfixToPrefix(string &s){
+    // Write your code here.
+    stack<string>st;
+    for(int i=0;i<s.size();i++)
+    {
+         char ch=s[i];
+         if(ch=='*'||ch=='/'||ch=='+'||ch=='-')
+         {
+             string str1=st.top();
+             st.pop();
+             string str2=st.top();
+             st.pop();
+             string res="";
+             res=ch+str2+str1;
+             st.push(res);
+         }
+         
+         else
+         {
+             string ans="";
+             ans=s[i];
+             st.push(ans);
+         }
+    }
+    
+    return st.top();
+}
