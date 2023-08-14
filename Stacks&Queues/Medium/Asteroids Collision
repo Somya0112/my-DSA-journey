@@ -1,0 +1,70 @@
+//Using Stack and vector(T.C=O(N),S.C=O(N))
+vector<int> asteroidCollision(vector<int>& asteroids)
+    {
+        stack<int>st;
+        for(auto a: asteroids)
+        {
+            while(!st.empty()&& a<0 &&st.top()>0)
+            {
+                int sum=a+st.top();
+                if(sum<0)
+                {
+                    st.pop();
+                }
+                else if(sum>0)
+                {
+                    a=0;
+                }
+                else
+                {
+                    st.pop();
+                    a=0;
+                }
+            }
+            if(a!=0)
+            st.push(a);
+        }
+
+        int n=st.size();
+        vector<int>res(n);
+
+        int t=n-1;
+        while(!st.empty())
+        {
+            res[t]=st.top();
+            st.pop();
+            t--;
+        }
+        return res;
+    }
+
+
+//Using only vector(T.C=O(N),S.C=O(N))
+vector<int> asteroidCollision(vector<int>& asteroids)
+    {
+        vector<int>st;
+        for(auto a: asteroids)
+        {
+            while(!st.empty()&& a<0 &&st.back()>0)
+            {
+                int sum=a+st.back();
+                if(sum<0)
+                {
+                    st.pop_back();
+                }
+                else if(sum>0)
+                {
+                    a=0;
+                }
+                else
+                {
+                    st.pop_back();
+                    a=0;
+                }
+            }
+            if(a!=0)
+            st.push_back(a);
+        }
+
+       return st;
+    }
