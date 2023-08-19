@@ -1,0 +1,72 @@
+//Optimal(Using Map)(T.C=O(N),S.C=O(1))
+class Solution {
+public:
+    int romanToInt(string s) {
+        unordered_map<char, int> m;
+        
+        m['I'] = 1;
+        m['V'] = 5;
+        m['X'] = 10;
+        m['L'] = 50;
+        m['C'] = 100;
+        m['D'] = 500;
+        m['M'] = 1000;
+        
+        int ans = 0;
+        
+        for(int i = 0; i < s.length(); i++){
+            if(m[s[i]] < m[s[i+1]]){
+                ans -= m[s[i]];
+            }
+            else{
+                ans += m[s[i]];
+            }
+        }
+        return ans;
+    }
+};
+
+
+
+
+//Optimal(T.C=O(N),S.C=O(1))
+class Solution {
+public:
+    int pattern(char c)
+    {
+        if(c=='I')
+        return 1;
+        else if(c=='V')
+        return 5;
+        else if(c=='X')
+        return 10;
+        else if(c=='L')
+        return 50;
+        else if(c=='C')
+        return 100;
+        else if(c=='D')
+        return 500;
+        else
+        return 1000;
+    }
+
+    int romanToInt(string s)
+    {
+        int num=0;
+        int size=s.size();
+        for(int i=0;i<size-1;i++)
+        {
+            int diff=pattern(s[i])-pattern(s[i+1]);
+            if(diff<0)
+            {
+                num-=pattern(s[i]);
+            }
+            else
+            {
+                num+=pattern(s[i]);
+            }
+        }
+        num+=pattern(s[size-1]);
+        return num;
+    }
+};
