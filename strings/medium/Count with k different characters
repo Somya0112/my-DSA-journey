@@ -1,0 +1,82 @@
+//Brute(T.C=O(N^2),S.C=O(1))
+int countSubStrings(string str, int k) 
+{
+    // Write your code here.
+    int find=0;
+    for(int i=0;i<str.size();i++)
+    {
+        int cnt=0;
+        int charcnt[26]={0};
+        for(int j=i;j<str.size();j++)
+        {
+            int charindex=str[j]-'a';
+            if(charcnt[charindex]==0)
+            {
+                cnt++;
+            }
+            charcnt[charindex]++;
+            if(cnt==k)
+            {
+                find++;
+            }
+            else if(cnt>k)
+            {
+                break;
+            }
+        }
+
+    }
+    return find;
+}
+
+
+
+//Optimal(T.C=O(N),S.C=O(1))
+int helper(string str, int k) 
+{
+
+    int i = 0, j = 0, currCount = 0;
+    int result = 0;
+
+    // Array to store count of characters.
+    vector<int>count(26, 0);
+
+    while (j < str.size()) 
+    {
+        // Index for current character.
+        int index = str[j] - 'a';
+
+        // Increment count for the current character.
+        count[index] += 1;
+
+        if (count[index] == 1) 
+        {
+            currCount++;
+        }
+
+        // Decrement count and increase ith pointer.
+        while (currCount > k) 
+        {
+            count[str[i] - 'a']--;
+            if (count[str[i] - 'a'] == 0) 
+            {
+                currCount--;
+            }
+
+            i++;
+        }
+
+        // Total substrings.
+        result += (j - i + 1);
+        j++;
+    }
+    return result;
+}
+
+int countSubStrings(string str, int k) {
+
+    // Calculating for at most k and at most k-1 distinct chars.
+    int ans = helper(str, k) - helper(str, k - 1);
+
+    return ans;
+}
