@@ -1,0 +1,65 @@
+//Brute(T.C=O(N),S.C=O(1))
+int count(vector<int>& arr, int n, int x) {
+    int cnt = 0;
+    for (int i = 0; i < n; i++) {
+
+        // counting the occurrences:
+        if (arr[i] == x) cnt++;
+    }
+    return cnt;
+}
+
+
+//Optimal(T.C=O(2*logN),S.C=O(1))
+#include<bits/stdc++.h>
+int firstoccur(vector<int>& nums,int n, int target)
+    {
+        int low=0,high=n-1;
+        int first=-1;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(nums[mid]==target)
+            {
+                first=mid;
+                high=mid-1;
+            }
+            else if(nums[mid]>target)
+            high=mid-1;
+            else 
+            low=mid+1;
+        }
+        return first;
+    }
+
+    int lastoccur(vector<int>& nums,int n, int target)
+    {
+        int low=0,high=n-1;
+        int last=-1;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(nums[mid]==target)
+            {
+                last=mid;
+                low=mid+1;
+            }
+            else if(nums[mid]>target)
+            high=mid-1;
+            else 
+            low=mid+1;
+        }
+        return last;
+    }
+
+
+int count(vector<int>& nums, int n, int x) {
+	// Write Your Code Here
+	
+	int first=firstoccur(nums,n,x);
+	int last=lastoccur(nums,n,x);
+	if(first==-1)
+	return 0;
+	else
+	return last-first+1;
+}
