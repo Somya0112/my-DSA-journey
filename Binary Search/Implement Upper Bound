@@ -1,0 +1,34 @@
+//Brute(Using linear Search,T.C=O(N),S.C=O(1))
+int upperBound(vector<int> &arr, int x, int n) {
+    for (int i = 0; i < n; i++)
+{
+        if (arr[i] > x) {
+            // upper bound found:
+            return i;
+        }
+    }
+    return n;
+}
+
+
+//Optimal(Binary Search,T.C=O(logN),S.C=O(1))
+int upperBound(vector<int> &arr, int x, int n){
+	// Write your code here.
+	int low=0;
+	int high=n-1;
+	int ans=x;
+	while(low<=high){
+		int mid=(low+high)/2;
+		if(arr[mid]>x)
+		{
+			 ans=mid;
+			 high=mid-1;
+		}
+		else
+        low=mid+1;
+	}
+	if(ans==x)
+	return n;
+
+	return ans;	
+}
