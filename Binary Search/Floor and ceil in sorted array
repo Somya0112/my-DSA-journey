@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+pair<int, int> getFloorAndCeil(int arr[], int n, int x) {
+	// Write your code here.
+	sort(arr,arr+n);
+	int low=0,high=n-1,ans1=-1;
+	while(low<=high)
+	{
+		int mid=(low+high)/2;
+        if(arr[mid]<=x)
+		{
+			ans1=arr[mid];
+			low=mid+1;
+		}
+		else
+		high=mid-1;
+	}
+
+	int ans2=lower_bound(arr,arr+n,x)-arr;
+
+	return {ans1,ans2==n?-1:arr[ans2]};
+}
