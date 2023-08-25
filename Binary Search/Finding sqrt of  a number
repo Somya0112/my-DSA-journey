@@ -1,0 +1,48 @@
+//Brute(T.C=O(N),S.C=O(1))
+int floorSqrt(int n)
+{
+    int ans=1;
+    for(int i=1;i<=n;i++)
+    {
+        long long val=i*i;
+        if(val<=n)
+        {
+             ans=i;
+        }
+        else
+        break;
+    }
+    return ans;
+}
+
+
+//Optimal1 (T.C=O(logN),S.C=o(1))
+int floorSqrt(int n)
+{
+    // Write your code here.
+    int ans=sqrt(n);
+    return ans;
+}
+
+//Optimal2 (T.C=O(logN),S.C=O(1))
+int floorSqrt(int n)
+{
+    // Write your code here.
+    int low=1,high=n;
+    int ans=1;
+    while(low<=high)
+    {
+        long long mid=(low+high)/2;
+        long long val=mid*mid;
+        if(val<=n)
+        {
+             ans=mid;
+             low=mid+1;
+        }
+        else
+        high=mid-1;
+    }
+    return ans;
+}
+
+
