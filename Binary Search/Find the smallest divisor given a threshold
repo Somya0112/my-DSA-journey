@@ -1,0 +1,74 @@
+//Brute(T.C=O(max(arr[])*N), where max(arr[]) = maximum element in the array, N = size of the array.,S.C=O(1))
+class Solution {
+public:
+    long long sumD(vector<int>& nums,int mid)
+    {
+        long long sum=0;
+        int n=nums.size();
+        for(int i=0;i<n;i++)
+        {
+            sum+=ceil((double)(nums[i])/(double)(mid));
+        }
+        return sum;
+    }
+
+    int smallestDivisor(vector<int>& nums, int val)
+    {
+        int n=nums.size();
+        int maxi=INT_MIN;
+        if(n>val) return -1;
+        for(int i=0;i<n;i++)
+        {
+            maxi=max(maxi,nums[i]);
+        }
+
+        for(int i=1;i<=maxi;i++)
+        {
+            if(sumD(nums,i)<=val)
+            return i;
+        }
+        return -1;
+    }
+};
+
+
+
+//Optimal(T.C= O(log(max(arr[]))*N), where max(arr[]) = maximum element in the array, N = size of the array.,S.C=O(1))
+class Solution {
+public:
+    long long sumD(vector<int>& nums,int mid)
+    {
+        long long sum=0;
+        int n=nums.size();
+        for(int i=0;i<n;i++)
+        {
+            sum+=ceil((double)(nums[i])/(double)(mid));
+        }
+        return sum;
+    }
+
+    int smallestDivisor(vector<int>& nums, int val)
+    {
+        int n=nums.size();
+        int maxi=INT_MIN;
+        if(n>val) return -1;
+        for(int i=0;i<n;i++)
+        {
+            maxi=max(maxi,nums[i]);
+        }
+
+        int low=1,high=maxi,ans=1;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(sumD(nums,mid)<=val)
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            low=mid+1;
+        }
+        return ans;
+    }
+};
