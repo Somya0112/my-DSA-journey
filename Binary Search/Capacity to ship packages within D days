@@ -1,0 +1,88 @@
+//Brute(T.C= O(N * (sum(weights[]) – max(weights[]) + 1)), 
+where sum(weights[]) = summation of all the weights, max(weights[]) = maximum of all the weights, N = size of the weights array.) S.C=O(1))
+class Solution {
+public:
+    int countdays(vector<int>&weights,int capacity)
+    {
+        int days=1,load=0;
+        int n=weights.size();
+        for(int i=0;i<n;i++)
+        {
+           if(load+weights[i]>capacity)
+           {
+               days=days+1;
+               load=weights[i];
+           }
+           else
+           load+=weights[i];
+        }
+        return days;
+    }
+
+    int shipWithinDays(vector<int>& weights, int days)
+    {
+        int n=weights.size();
+        int maxi=INT_MIN,sum=0;
+        for(int i=0;i<n;i++)
+        {
+            maxi=max(maxi,weights[i]);
+            sum+=weights[i];
+        }
+        
+        for(int i=maxi;i<=sum;i++)
+        {
+            if(countdays(weights,i)<=days)
+            return i;
+        }
+        return -1;
+    }
+};
+
+
+//Optimal(T.C=O(N * log(sum(weights[]) – max(weights[]) + 1)),
+where sum(weights[]) = summation of all the weights, max(weights[]) = maximum of all the weights, N = size of the weights array.) S.C=O(1))
+class Solution {
+public:
+    int countdays(vector<int>&weights,int capacity)
+    {
+        int days=1,load=0;
+        int n=weights.size();
+        for(int i=0;i<n;i++)
+        {
+           if(load+weights[i]>capacity)
+           {
+               days=days+1;
+               load=weights[i];
+           }
+           else
+           load+=weights[i];
+        }
+        return days;
+    }
+
+    int shipWithinDays(vector<int>& weights, int days)
+    {
+        int n=weights.size();
+        int maxi=INT_MIN,sum=0;
+        for(int i=0;i<n;i++)
+        {
+            maxi=max(maxi,weights[i]);
+            sum+=weights[i];
+        }
+        
+        int low=maxi,high=sum,ans=0;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            int reqdays=countdays(weights,mid);
+            if(reqdays<=days)
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            low=mid+1;
+        }
+        return ans;
+    }
+};
