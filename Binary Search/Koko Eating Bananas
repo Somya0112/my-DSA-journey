@@ -1,0 +1,87 @@
+//Brute(T.C=O(max(a[]) * N),S.C=O(1))
+class Solution {
+public:
+    int findmax(vector<int>&v)
+    {
+        int maxi=INT_MIN;
+        int n=v.size();
+        for(int i=0;i<n;i++)
+        {
+            maxi=max(maxi,v[i]);
+        }
+        return maxi;
+    }
+
+    long long calchours(vector<int>&v,int hourly)
+    {
+        long long totalh=0;
+        int n=v.size();
+        for(int i=0;i<n;i++)
+        {
+            totalh+=ceil((double)(v[i])/(hourly));
+        }
+        return totalh;
+    }
+
+    int minEatingSpeed(vector<int>& piles, int h) 
+    {
+        int maxi=findmax(piles);
+        for(int i=1;i<=maxi;i++)
+        {
+            long long reqtime=calchours(piles,i);
+            if(reqtime<=h)
+            return i;
+        }
+        return maxi;
+    }
+};
+
+
+
+
+//Optimal(T.C=O(N * log(max(v[]))), where max(v[]) is the maximum element in the array and N = size of the array.),S.C=O(1))
+class Solution {
+public:
+    int findmax(vector<int>&v)
+    {
+        int maxi=INT_MIN;
+        int n=v.size();
+        for(int i=0;i<n;i++)
+        {
+            maxi=max(maxi,v[i]);
+        }
+        return maxi;
+    }
+
+    long long calchours(vector<int>&v,int hourly)
+    {
+        long long totalh=0;
+        int n=v.size();
+        for(int i=0;i<n;i++)
+        {
+            totalh+=ceil((double)(v[i])/(hourly));
+        }
+        return totalh;
+    }
+
+    int minEatingSpeed(vector<int>& piles, int h) 
+    {
+        int low=1,high=findmax(piles);
+        int ans=1;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            long long reqtime=calchours(piles,mid);
+            if(reqtime<=h)
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+};
