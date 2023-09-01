@@ -1,0 +1,77 @@
+//Brute(T.C=O(NlogN) + O(N *(max(stalls[])-min(stalls[]))),
+where N = size of the array, max(stalls[]) = maximum element in stalls[] array, min(stalls[]) = minimum element in stalls[] array.,
+S.C=O(1))
+bool canweplace(vector<int>stalls,int dis, int cows)
+{
+    int n=stalls.size();
+    int cnt=1;
+    int last=stalls[0];
+    for(int i=1;i<n;i++)
+    {
+        if(stalls[i]-last>=dis)
+        {
+            cnt+=1;
+            last=stalls[i];
+        }
+        if(cnt>=cows)
+        return true;
+    }
+    return false;
+}
+
+
+
+int aggressiveCows(vector<int> &stalls, int k)
+{
+    //    Write your code here.
+    int n=stalls.size();
+    sort(stalls.begin(),stalls.end());
+    int limit=stalls[n-1]-stalls[0];
+    for(int i=1;i<=limit;i++)
+    {
+        if(canweplace(stalls,i,k)==false)
+        return i-1;
+    }
+    return limit;
+}
+
+
+
+//Optimal(T.C=O(NlogN) + O(N * log(max(stalls[])-min(stalls[]))),
+where N = size of the array, max(stalls[]) = maximum element in stalls[] array, min(stalls[]) = minimum element in stalls[] array.,
+S.C=O(1))
+bool canweplace(vector<int>stalls,int dis, int cows)
+{
+    int n=stalls.size();
+    int cnt=1;
+    int last=stalls[0];
+    for(int i=1;i<n;i++)
+    {
+        if(stalls[i]-last>=dis)
+        {
+            cnt+=1;
+            last=stalls[i];
+        }
+        if(cnt>=cows)
+        return true;
+    }
+    return false;
+}
+
+
+int aggressiveCows(vector<int> &stalls, int k)
+{
+    //    Write your code here.
+    int n=stalls.size();
+    sort(stalls.begin(),stalls.end());
+    int low=1,high=stalls[n-1]-stalls[0];
+    while(low<=high)
+    {
+        int mid=(low+high)/2;
+        if(canweplace(stalls,mid,k)==true)
+        low=mid+1;
+        else
+        high=mid-1;
+    }
+    return high;
+}
