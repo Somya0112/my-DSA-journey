@@ -1,0 +1,10 @@
+int setBits(int N)
+{
+    // Write your code here.
+   int val=N&(N+1);
+   if(val==0)
+   return N;
+
+   return N|(N+1);
+}
+
