@@ -1,0 +1,12 @@
+int minBitFlips(int start, int goal)
+    {
+        int val=start^goal;
+        int cnt=0;
+        while(val!=0)
+        {
+            if(val&1==1)
+            cnt++;
+            val=val>>1;
+        }
+        return cnt;
+    }
