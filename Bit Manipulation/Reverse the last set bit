@@ -1,0 +1,4 @@
+int solve(int N)
+{
+   return N&(N-1);
+}
