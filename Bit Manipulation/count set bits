@@ -1,0 +1,22 @@
+int count(int N)
+{
+    //Write your code here
+    int numberOf=0;
+    while(N>0)
+    {
+        if(N&1==1)
+        numberOf++;
+        N=N>>1;
+    }
+    return numberOf;
+}
+
+int countSetBits(int N)
+{
+    int ans=0;
+    for(int i=1;i<=N;i++)
+    {
+        ans+=count(i);
+    }
+    return ans;
+}
