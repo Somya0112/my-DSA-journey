@@ -1,0 +1,115 @@
+ /* Brute
+    Time Complexity: O(n)
+
+    Space Complexity: O(n)
+
+    Where 'n' is the size of array ‘arr'.
+*/
+
+vector<int> twoOddNum(vector<int> arr)
+{
+    // Create a hashmap to hold the frequency of each element in 'arr'.
+    unordered_map<int,int> freq;
+
+    // Get the length of the 'Arr' vector.
+    int n = arr.size();
+
+    // Create a vector to hold the two odd numbers that are found.
+    vector<int> ans;
+
+    // Calculate the frequency of each element in 'Arr' and store it in the freq map.
+    for (int i = 0; i < n; i++)
+    {
+        freq[arr[i]]++;
+    }
+
+    // Iterate through the elements in the freq map and add any element with an odd frequency to the answer vector.
+    for (auto &element: freq)
+    {
+        if (element.second % 2 == 1)
+        {
+            ans.push_back(element.first);
+        }
+    }
+
+    // If the first element in the answer vector is smaller than the second element, swap them.
+    if (ans[0] < ans[1])
+    {
+        swap(ans[0], ans[1]);
+    }
+
+    // Return the vector containing the two odd numbers.
+    return ans;
+} 
+
+
+
+
+
+
+
+
+//Optimal
+/*
+    Time Complexity: O(n)
+
+    Space Complexity: O(1)
+
+    Where 'n' is the size of array ‘arr'.
+*/
+
+vector<int> twoOddNum(vector<int> arr)
+{
+    // Initialize a variable to hold the XOR result of all elements in 'arr'.
+    int xorResult = 0;
+
+    // Get the size of the 'arr' vector.
+    int n = arr.size();
+
+    // Create a vector to hold the two odd numbers that are found.
+    vector<int> ans;
+
+    // Calculate the XOR of all elements in 'arr'.
+    for (int i = 0; i < n; i++)
+    {
+        xorResult = xorResult ^ arr[i];
+    }
+
+    // Find the rightmost set bit in the XOR result.
+    int k = xorResult & (~(xorResult - 1));
+
+    // Initialize variables to hold the XOR of the two groups of numbers.
+    int group1XOR = 0;
+    int group2XOR = 0;
+
+    // Divide the elements of 'arr' into two groups based on the 'kth' bit.
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] & k)
+        {
+            group1XOR = group1XOR ^ arr[i];
+        }
+        else
+        {
+            group2XOR = group2XOR ^ arr[i];
+        }
+    }
+
+    // Determine which of the two groups contains the smaller odd number.
+    int odd1 = group1XOR;
+    int odd2 = group2XOR;
+    if (odd1 < odd2)
+    {
+        ans.push_back(odd2);
+        ans.push_back(odd1);
+    }
+    else
+    {
+        ans.push_back(odd1);
+        ans.push_back(odd2);
+    }
+
+    // Return the vector containing the two odd numbers.
+    return ans;
+
+}
