@@ -1,0 +1,77 @@
+//Brute(T.C=O(N/M),S.C=O(1))
+int divideTwoInteger(int dividend, int divisor) 
+{   
+    bool isDividendNegative = false;
+    if(dividend < 0)
+    {
+        dividend *= -1;
+        isDividendNegative = true;
+    }
+
+    bool isDivisorNegative = false;
+    if(divisor < 0)
+    {
+        divisor *= -1;
+        isDivisorNegative = true;
+    }
+
+    int quotient = 0;
+
+    while(dividend >= divisor)
+    {
+        dividend -= divisor;
+        quotient += 1;
+    }
+    if(isDividendNegative && isDivisorNegative)
+    {
+        return quotient;
+    }
+    if(!isDividendNegative && !isDivisorNegative)
+    {
+        return quotient;
+    }
+    return -1 * quotient;
+
+} 
+
+
+
+
+
+
+//Optimal(T.C=O(1),S.C=O(1))
+int divideTwoInteger(int dividend, int divisor) {
+	bool isDividendNegative=false;
+	if(dividend<0)
+	{
+		dividend*=-1;
+		isDividendNegative=true;
+	}
+
+	bool isDivisorNegative=false;
+	if(divisor<0)
+	{
+		divisor*=-1;
+		isDivisorNegative=true;
+	}
+
+	long long b=divisor;
+	long long a=dividend;
+	long long quotient=0;
+	for(int i=30;i>=0;i--)
+	{
+		if((b<<i)<=a)
+		{
+			a-=(b<<i);
+			quotient|=(1<<i);
+		}
+	}
+
+	if(isDividendNegative&&isDivisorNegative)
+	return quotient;
+
+	if(!isDivisorNegative&&!isDividendNegative)
+	return quotient;
+
+	return -1*quotient;
+} 
