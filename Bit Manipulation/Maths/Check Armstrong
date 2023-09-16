@@ -1,0 +1,23 @@
+bool checkArmstrong(int n){
+	//Write your code here
+	int original=n;
+	int temp=n;
+	int cnt=0;
+	while(temp!=0)
+	{
+		cnt++;
+		temp=temp/10;
+	}
+
+	int sum=0;
+	while(n!=0)
+	{
+		int digit=n%10;
+		sum+=pow(digit,cnt);
+		n/=10;
+	}
+	if(original==sum)
+	return true;
+	else
+	return false;
+}
