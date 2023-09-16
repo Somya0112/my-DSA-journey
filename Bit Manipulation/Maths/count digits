@@ -1,0 +1,30 @@
+//brute(T.C=O(N),S.C=O(1))
+#include<bits/stdc++.h>
+using namespace std;
+int count_digits( int n )
+{
+   int x = n; int count =0;
+   while( x !=0 ) 
+   {
+       x = x / 10;
+       count++;
+   }
+   return count;
+}
+
+
+//optimal(T.C=O(1),S.C=O(1))
+int count_digits( int n )
+{
+  string x = to_string(n);
+  return x.length(); 
+}
+
+
+//optimal(T.C=O(1),S.C=O(1))
+int count_digits( int n )
+{
+  int digits = floor(log10(n) + 1);
+  return digits;
+}
+
