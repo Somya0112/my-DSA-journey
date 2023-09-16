@@ -1,0 +1,24 @@
+//brute(Time Complexity: O(N).Space Complexity: O(1).)
+int calcGCD(int n, int m){
+int ans;
+	for (int i = 1; i <= min(num1, num2); i++) {
+		if (num1 % i == 0 && num2 % i == 0) {
+			ans = i;
+		}
+	}
+return ans;
+}
+
+
+//optimal(T.C=O(logɸmin(n,m)),S.C=O(1))
+int calcGCD(int n, int m){
+    // Write your code here.
+    if(m>n)
+    {
+        swap(m,n);
+    }
+    if(m==0)
+    return n;
+
+    return calcGCD(m,n%m);
+}
