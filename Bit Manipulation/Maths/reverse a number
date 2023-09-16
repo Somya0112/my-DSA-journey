@@ -1,0 +1,15 @@
+int reverse(int x) {
+        long int num=0;
+        long int pos=abs(x);
+
+        while(pos>0)
+        {
+            int rev=pos%10;
+            num=num*10+rev;
+            pos=pos/10;
+        }
+        
+        if(num>INT_MAX || num<INT_MIN) return 0;
+        if(x>=0) return num;
+        else return -num;
+    }
