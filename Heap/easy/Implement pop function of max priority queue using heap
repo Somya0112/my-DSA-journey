@@ -1,0 +1,38 @@
+int pop(vector<int> &heap)
+{
+    if(heap.size()==0)
+    return -1;
+
+    int ans=heap[0];
+    heap[0]=heap.back();
+    heap.pop_back();
+
+    if(heap.size()==0)
+    return ans;
+    int i=0;
+
+    while(true)
+    {
+        int left=2*i+1;
+        int right=2*i+2;
+        int leftVal=0,rightVal=0;
+        if(left<heap.size())
+        leftVal=heap[left];
+        if(right<heap.size())
+        rightVal=heap[right];
+
+        if(leftVal<=heap[i]&&rightVal<=heap[i])
+        break;
+        else if(leftVal>=rightVal)
+        {
+            swap(heap[i],heap[left]);
+            i=left;
+        }
+        else
+        {
+            swap(heap[i],heap[right]);
+            i=right;
+        }
+    }
+    return ans;
+}
